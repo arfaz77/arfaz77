@@ -1,11 +1,9 @@
 
-<h2 align="left">Hi 👋! My name is Amjath Ali M, and I'm a Front-End Developer with 1 year of experience, from Kerala</h2>
+<h2 align="left">Hi 👋! My name is Amjath Ali M, and I'm a Full Stack Developer with 1.7 year of experience, from Kerala</h2>
 
 - 🔭 I’m currently working on **Autobse**
 
-- 🌱 I’m currently learning **backend in nestJS**
-
-- 💬 Ask me about **ReactJS, NextJS, Responsive design, and Animations**
+- 💬 Ask me about **ReactJS, NextJS, Responsive design,Backend devolopment and Animations**
 
 - 📫 How to reach me **amjadalipaduppu@gmail.com**
 
