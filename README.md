@@ -1,7 +1,7 @@
 
 <h2 align="left">Hi 👋! My name is Amjath Ali M, and I'm a Full Stack Developer with 1.7 year of experience, from Kerala</h2>
 
-- 🔭 I’m currently working on **Autobse**
+- 🔭 I’m currently working on **Indian edu hub**
 
 - 💬 Ask me about **ReactJS, NextJS, Responsive design,Backend devolopment and Animations**
 
