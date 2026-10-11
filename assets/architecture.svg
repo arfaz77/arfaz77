@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="350" viewBox="0 0 1000 350" role="img" aria-label="Animated architecture: API writes a lead and an outbox row in one Postgres transaction, a relay pushes events to a SKIP LOCKED queue, workers (CRM workflow, Meta CAPI, n8n) consume them, failures retry, dashboards update. Events lost: 0.">
+  <style>
+    .mono { font-family: 'JetBrains Mono', 'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+    .sans { font-family: 'Space Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .box { fill: #0F151D; stroke: #263040; stroke-width: 1.5; }
+    .t { font-size: 15px; font-weight: 700; fill: #F4F7FA; }
+    .s { font-size: 11px; fill: #8B98A9; }
+    .lane { fill: none; stroke: #263040; stroke-width: 1.5; stroke-dasharray: 4 5; }
+  </style>
+  <defs>
+    <clipPath id="c"><rect width="1000" height="350" rx="14"/></clipPath>
+    <path id="laneA" d="M150,185 H610 C625,185 625,105 640,105 H790 C815,105 815,185 840,185"/>
+    <path id="laneB" d="M150,185 H840"/>
+    <path id="laneC" d="M150,185 H610 C625,185 625,265 640,265 H790 C815,265 815,185 840,185"/>
+  </defs>
+
+  <g clip-path="url(#c)">
+    <rect width="1000" height="350" fill="#0B0F14"/>
+
+    <text x="24" y="36" class="mono" font-size="13" fill="#8B98A9">// architecture.svg — how an event travels through my systems</text>
+    <text x="976" y="36" text-anchor="end" class="mono" font-size="13" fill="#8B98A9">events lost: <tspan fill="#3DD6C4">0</tspan></text>
+
+    <!-- lanes -->
+    <use xlink:href="#laneA" class="lane"/>
+    <use xlink:href="#laneB" class="lane"/>
+    <use xlink:href="#laneC" class="lane"/>
+
+    <!-- flowing events (drawn under the boxes, so they pass "through" them) -->
+    <g fill="#F5A524">
+      <circle r="5"><animateMotion dur="3.6s" repeatCount="indefinite" begin="0s"><mpath xlink:href="#laneB"/></animateMotion></circle>
+      <circle r="5"><animateMotion dur="3.6s" repeatCount="indefinite" begin="-1.8s"><mpath xlink:href="#laneB"/></animateMotion></circle>
+      <circle r="5"><animateMotion dur="4s" repeatCount="indefinite" begin="-0.6s"><mpath xlink:href="#laneA"/></animateMotion></circle>
+      <circle r="5"><animateMotion dur="4s" repeatCount="indefinite" begin="-2.6s"><mpath xlink:href="#laneA"/></animateMotion></circle>
+      <circle r="5"><animateMotion dur="4s" repeatCount="indefinite" begin="-3.3s"><mpath xlink:href="#laneC"/></animateMotion></circle>
+    </g>
+
+    <!-- the event that fails, retries, and still lands -->
+    <circle r="6" fill="#F5A524">
+      <animateMotion id="a1" dur="2.2s" begin="0.5s;a3.end+1.4s" fill="freeze" path="M150,185 H610 C625,185 625,265 640,265 H715"/>
+      <animateMotion id="a2" dur="1.3s" begin="a1.end" fill="freeze" path="M715,265 H640 C625,265 625,185 610,185 H505"/>
+      <animateMotion id="a3" dur="2.4s" begin="a2.end" fill="freeze" path="M505,185 H610 C625,185 625,265 640,265 H790 C815,265 815,185 840,185"/>
+      <set attributeName="fill" to="#F07178" begin="a1.end"/>
+      <set attributeName="fill" to="#F5A524" begin="a3.end"/>
+    </circle>
+
+    <!-- API -->
+    <rect class="box" x="20" y="150" width="130" height="70" rx="10"/>
+    <text x="85" y="182" text-anchor="middle" class="sans t">API</text>
+    <text x="85" y="202" text-anchor="middle" class="mono s">Elysia · Hono</text>
+
+    <!-- Postgres: one transaction -->
+    <rect class="box" x="200" y="128" width="170" height="114" rx="10"/>
+    <text x="285" y="150" text-anchor="middle" class="sans t">Postgres · 1 tx</text>
+    <rect x="214" y="162" width="142" height="30" rx="6" fill="#18212C">
+      <animate attributeName="fill" values="#18212C;#134E4A;#18212C" dur="1.8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="285" y="182" text-anchor="middle" class="mono s" fill="#C9D3DE">INSERT lead</text>
+    <rect x="214" y="200" width="142" height="30" rx="6" fill="#18212C">
+      <animate attributeName="fill" values="#18212C;#134E4A;#18212C" dur="1.8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="285" y="220" text-anchor="middle" class="mono s" fill="#C9D3DE">INSERT outbox</text>
+
+    <text x="395" y="174" text-anchor="middle" class="mono s">relay</text>
+
+    <!-- Queue -->
+    <rect class="box" x="420" y="128" width="170" height="114" rx="10"/>
+    <text x="505" y="150" text-anchor="middle" class="sans t">Job queue</text>
+    <rect x="436" y="168" width="40" height="22" rx="4" fill="#18212C">
+      <animate attributeName="fill" values="#18212C;#F5A524;#F5A524;#18212C" keyTimes="0;.1;.5;.6" dur="2.4s" repeatCount="indefinite" begin="0s"/>
+    </rect>
+    <rect x="485" y="168" width="40" height="22" rx="4" fill="#18212C">
+      <animate attributeName="fill" values="#18212C;#F5A524;#F5A524;#18212C" keyTimes="0;.1;.5;.6" dur="2.4s" repeatCount="indefinite" begin="-0.8s"/>
+    </rect>
+    <rect x="534" y="168" width="40" height="22" rx="4" fill="#18212C">
+      <animate attributeName="fill" values="#18212C;#F5A524;#F5A524;#18212C" keyTimes="0;.1;.5;.6" dur="2.4s" repeatCount="indefinite" begin="-1.6s"/>
+    </rect>
+    <text x="505" y="218" text-anchor="middle" class="mono s">FOR UPDATE</text>
+    <text x="505" y="232" text-anchor="middle" class="mono s" fill="#F5A524">SKIP LOCKED</text>
+
+    <!-- Workers -->
+    <rect class="box" x="640" y="77" width="150" height="56" rx="10"/>
+    <text x="715" y="101" text-anchor="middle" class="sans t">CRM workflow</text>
+    <text x="715" y="120" text-anchor="middle" class="mono s">PBAC · step branching</text>
+
+    <rect class="box" x="640" y="157" width="150" height="56" rx="10"/>
+    <text x="715" y="181" text-anchor="middle" class="sans t">Meta CAPI</text>
+    <text x="715" y="200" text-anchor="middle" class="mono s">9.4 match quality</text>
+
+    <rect class="box" x="640" y="237" width="150" height="56" rx="10">
+      <animate attributeName="stroke" values="#F07178;#F07178" dur="1.3s" begin="a1.end"/>
+    </rect>
+    <text x="715" y="261" text-anchor="middle" class="sans t">n8n pipelines</text>
+    <text x="715" y="280" text-anchor="middle" class="mono s">lead automation</text>
+
+    <text x="715" y="313" text-anchor="middle" class="mono" font-size="12" fill="#F07178" opacity="0">✕ timeout → back to queue, retry #1
+      <animate attributeName="opacity" values="1;1" dur="1.6s" begin="a1.end"/>
+    </text>
+
+    <!-- Dashboards -->
+    <rect class="box" x="840" y="140" width="140" height="90" rx="10"/>
+    <text x="910" y="162" text-anchor="middle" class="sans t">Dashboards</text>
+    <g fill="#3DD6C4">
+      <rect x="866" y="190" width="14" height="24" rx="2"><animate attributeName="height" values="10;30;18;10" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="208;188;200;208" dur="3s" repeatCount="indefinite"/></rect>
+      <rect x="886" y="190" width="14" height="24" rx="2"><animate attributeName="height" values="22;12;32;22" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="196;206;186;196" dur="3s" repeatCount="indefinite"/></rect>
+      <rect x="906" y="190" width="14" height="24" rx="2"><animate attributeName="height" values="16;28;12;16" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="202;190;206;202" dur="3s" repeatCount="indefinite"/></rect>
+      <rect x="926" y="190" width="14" height="24" rx="2"><animate attributeName="height" values="28;16;24;28" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="190;202;194;190" dur="3s" repeatCount="indefinite"/></rect>
+    </g>
+    <text x="910" y="256" text-anchor="middle" class="mono" font-size="12" fill="#3DD6C4" opacity="0">✓ ack · nothing lost
+      <animate attributeName="opacity" values="1;1" dur="1.6s" begin="a3.end"/>
+    </text>
+
+    <!-- legend -->
+    <g class="mono" font-size="12" fill="#8B98A9">
+      <circle cx="30" cy="333" r="5" fill="#F5A524"/><text x="42" y="337">event</text>
+      <circle cx="104" cy="333" r="5" fill="#F07178"/><text x="116" y="337">retrying</text>
+      <text x="200" y="337">lead + outbox commit together, so no event is ever written without its row</text>
+    </g>
+  </g>
+  <rect x="0.5" y="0.5" width="999" height="349" rx="14" fill="none" stroke="#263040"/>
+</svg>

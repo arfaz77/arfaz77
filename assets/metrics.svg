@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="140" viewBox="0 0 1000 140" role="img" aria-label="3+ years in production · 9.4 Meta CAPI event match quality · 1.8x faster app responsiveness · 60% less dev time">
+  <style>
+    .n { font-family: 'Space Grotesk', 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 46px; font-weight: 700; fill: #F5A524; }
+    .l { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; fill: #A9B5C3; }
+    .card { fill: #0F151D; stroke: #263040; }
+    .in { opacity: 0; animation: rise .8s ease-out forwards; }
+    .bar { transform-box: fill-box; transform-origin: left; transform: scaleX(0); animation: grow 1.4s ease-out forwards; }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes grow { to { transform: scaleX(1); } }
+  </style>
+  <g class="in" style="animation-delay:.1s">
+    <rect class="card" x="0.5" y="0.5" width="235" height="139" rx="12"/>
+    <text class="n" x="24" y="66">3+</text>
+    <text class="l" x="24" y="98">years in production</text>
+    <rect class="bar" x="24" y="116" width="188" height="3" rx="1.5" fill="#F5A524" style="animation-delay:.3s"/>
+  </g>
+  <g class="in" style="animation-delay:.3s">
+    <rect class="card" x="254.5" y="0.5" width="235" height="139" rx="12"/>
+    <text class="n" x="278" y="66">9.4</text>
+    <text class="l" x="278" y="98">Meta CAPI event match quality</text>
+    <rect class="bar" x="278" y="116" width="188" height="3" rx="1.5" fill="#3DD6C4" style="animation-delay:.5s"/>
+  </g>
+  <g class="in" style="animation-delay:.5s">
+    <rect class="card" x="508.5" y="0.5" width="235" height="139" rx="12"/>
+    <text class="n" x="532" y="66">1.8×</text>
+    <text class="l" x="532" y="98">faster app responsiveness</text>
+    <rect class="bar" x="532" y="116" width="188" height="3" rx="1.5" fill="#F5A524" style="animation-delay:.7s"/>
+  </g>
+  <g class="in" style="animation-delay:.7s">
+    <rect class="card" x="763.5" y="0.5" width="235" height="139" rx="12"/>
+    <text class="n" x="787" y="66">60%</text>
+    <text class="l" x="787" y="98">less dev time, reusable UI</text>
+    <rect class="bar" x="787" y="116" width="188" height="3" rx="1.5" fill="#3DD6C4" style="animation-delay:.9s"/>
+  </g>
+</svg>

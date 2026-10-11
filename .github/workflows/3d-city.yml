@@ -1,0 +1,30 @@
+name: Generate 3D contribution city
+
+on:
+  schedule:
+    - cron: "0 18 * * *" # daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          # To include private contributions, create a classic PAT (read:user, repo)
+          # saved as the repo secret GH_3D_TOKEN, and swap it in here.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+
+      - name: Commit & push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A .
+          if git commit -m "chore: regenerate 3D contribution city"; then git push; fi
